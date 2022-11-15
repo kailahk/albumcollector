@@ -1,32 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>All My Albums</h1>
-    <hr>
-    <br>
-    <h4>All Time Favorites</h4>
-    {% for album in albums %}
-        {% if album.list == 'All Time Favorites' %}
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">{{ album.name }}</span>
-                    <p>Artist: {{ album.artist }}</p>
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
-    <br>
-    <hr>
-    <br>
-    <h4>Best of 2022</h4>
-    {% for album in albums %}
-        {% if album.list == "Best of 2022" %}
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">{{ album.name }}</span>
-                    <p>Artist: {{ album.artist }}</p>
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
+<h1>All My Albums</h1>
+<hr>
+<br>
+<h4>All Time Favorites</h4>
+{% for album in albums %}
+{% if album.list == 'All Time Favorites' %}
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ album.name }}</span>
+        <p>Artist: {{ album.artist }}</p>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<br>
+<hr>
+<br>
+<h4>Best of 2022</h4>
+{% for album in albums %}
+{% if album.list == "Best of 2022" %}
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ album.name }}</span>
+        <p>Artist: {{ album.artist }}</p>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<br>
+<hr>
+<br>
+<h4>To Listen</h4>
 {% endblock %}

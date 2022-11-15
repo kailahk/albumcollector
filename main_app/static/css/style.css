@@ -12,3 +12,7 @@ footer.page-footer {
     padding-top: 0;
     text-align: center;
 }
+
+nav, .page-footer {
+    background-color: #9fa8da
+}
