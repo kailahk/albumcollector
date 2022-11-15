@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Album Details</h1>
+<hr>
+<br>
+<h5>Title: {{ album.title }}</h5>
+<h5>Artist: {{ album.artist }}</h5>
+<h5>Genres: {{ album.genres }}</h5>
+<h5>Release Year: {{ album.release_year }}</h5>
+<h5>Tracklist: {{ album.track_list }}</h5>
+<h5>Your List: {{ album.list }}</h5>
+<br>
+<hr>
+
+{% endblock %}
