@@ -17,11 +17,12 @@
         <nav>
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Album Collector</a></li>
+                    <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Album Collector</a></li>
                 </ul>
                 <ul class="right">
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/albums">View All My Albums</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'create_album' %}">Add Album</a></li>
+                    <li><a href="{% url 'index' %}">View All My Albums</a></li>
                 </ul>
             </div>
         </nav>

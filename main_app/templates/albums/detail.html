@@ -12,5 +12,9 @@
 <h5>Your List: {{ album.list }}</h5>
 <br>
 <hr>
+<div class="card-action">
+    <a href="{% url 'update_album' album.id %}" class="btn">Edit</a>
+    <a href="{% url 'delete_album' album.id %}" class="btn">Delete</a>
+</div>
 
 {% endblock %}

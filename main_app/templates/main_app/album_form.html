@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if object %}
+    <h1>Edit Info for <span class="teal-text">{{ object.title }}</span></h1>
+{% else %}
+    <h1>Add Album</h1>
+{% endif %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <br>
+    <input type="submit" value="Submit!" class="btn">
+</form>
+
+{% endblock %}
