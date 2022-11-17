@@ -2,19 +2,65 @@
 
 {% block content %}
 <h1>Album Details</h1>
-<hr>
-<br>
-<h5>Title: {{ album.title }}</h5>
-<h5>Artist: {{ album.artist }}</h5>
-<h5>Genres: {{ album.genres }}</h5>
-<h5>Release Year: {{ album.release_year }}</h5>
-<h5>Tracklist: {{ album.track_list }}</h5>
-<h5>Your List: {{ album.list }}</h5>
-<br>
-<hr>
-<div class="card-action">
-    <a href="{% url 'update_album' album.id %}" class="btn">Edit</a>
-    <a href="{% url 'delete_album' album.id %}" class="btn">Delete</a>
+<div class="row">
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ album.title }}</span>
+                <p>Artist: {{ album.artist }}</p>
+                <p>Genres: {{ album.genres }}</p>
+                <p>Release Year: {{ album.release_year }}</p>
+                <p>Tracklist: {{ album.track_list }}</p>
+                <p>Your List: {{ album.list }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'update_album' album.id %}" class="btn">Edit</a>
+                <a href="{% url 'delete_album' album.id %}" class="btn">Delete</a>
+            </div>
+        </div>
+    </div>
+    <h4>&nbsp;&nbsp;Listens:</h4>
+    <div class="col s6">
+        <form method="POST" action="{% url 'add_listen' album.id %}">
+            {% csrf_token %}
+            {{ listen_form.as_p }}
+            <input type="submit" class="btn" value="Add Listen">
+        </form>
+        {% if album.listened_within_a_week %}
+        <div class="card-panel teal-text center-align">{{album.title}} has been listened to within the past week</div>
+        {% else %}
+        <div class="card-panel red-text center-align">{{album.title}} might need a listen</div>
+        {% endif %}
+        <table class="striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time of Day</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for listen in album.listen_set.all %}
+                <tr>
+                    <td>{{listen.date}}</td>
+                    <td>{{listen.get_timeofday_display}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<script>
+    const dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+    });
+
+    const selectEl = document.getElementById('id_timeofday');
+    M.FormSelect.init(selectEl);
+</script>
 
 {% endblock %}
