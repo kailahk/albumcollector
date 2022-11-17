@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Album
+from django.views.generic import ListView, DetailView
+from .models import Album, List
 from .forms import ListenForm
 
 # Create your views here.
@@ -25,11 +26,11 @@ def albums_detail(request, album_id):
 
 class CreateAlbum(CreateView):
     model = Album
-    fields = '__all__'
+    fields = ['title', 'artist', 'genres', 'release_year', 'track_list']
 
 class UpdateAlbum(UpdateView):
     model = Album
-    fields = '__all__'
+    fields = ['title', 'artist', 'genres', 'release_year', 'track_list']
 
 class DeleteAlbum(DeleteView):
     model = Album
@@ -42,3 +43,21 @@ def add_listen(request, album_id):
         new_listen.album_id = album_id
         new_listen.save()
     return redirect('detail', album_id=album_id)
+
+class ListList(ListView):
+    model = List
+
+class ListDetail(DetailView):
+    model = List
+
+class ListCreate(CreateView):
+    model = List
+    fields = ['name', 'color']
+
+class ListUpdate(UpdateView):
+    model = List
+    fields = ['name', 'color']
+
+class ListDelete(DeleteView):
+    model = List
+    success_url = '/lists'

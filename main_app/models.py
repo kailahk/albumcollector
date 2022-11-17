@@ -10,6 +10,7 @@ TIMES_OF_DAY = (
 )
 
 # Create your models here.
+
 class Album(models.Model):
     title = models.CharField(max_length=100)
     artist = models.CharField(max_length=100)
@@ -29,6 +30,15 @@ class Album(models.Model):
         week_ago = today - timedelta(days=7)
         return self.listen_set.filter(date__gt=week_ago).exists()
 
+class List(models.Model):
+    name = models.CharField(max_length=55)
+    color = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('lists_detail', kwargs={'pk':self.id})
 
 class Listen(models.Model):
     date = models.DateField()
