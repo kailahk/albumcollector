@@ -19,9 +19,11 @@ def albums_index(request):
 
 def albums_detail(request, album_id):
     album = Album.objects.get(id=album_id)
+    id_list = album.lists.all().values_list('id')
+    lists_album_doesnt_have = List.objects.exclude(id__in=id_list)
     listen_form = ListenForm()
     return render(request, 'albums/detail.html', {
-        'album': album, 'listen_form': listen_form
+        'album': album, 'listen_form': listen_form, 'lists': lists_album_doesnt_have
     })
 
 class CreateAlbum(CreateView):
@@ -61,3 +63,11 @@ class ListUpdate(UpdateView):
 class ListDelete(DeleteView):
     model = List
     success_url = '/lists'
+
+def assoc_list(request, album_id, list_id):
+    Album.objects.get(id=album_id).lists.add(list_id)
+    return redirect('detail', album_id=album_id)
+
+def remove_list(request, album_id, list_id):
+    Album.objects.get(id=album_id).lists.remove(list_id)
+    return redirect('detail', album_id=album_id)

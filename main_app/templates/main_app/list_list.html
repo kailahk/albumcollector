@@ -4,13 +4,17 @@
 <h1>All Lists</h1>
 
 {% for list in list_list %}
-  <a href="{% url 'lists_detail' list.id %}">
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title" style="color: {{ list.color }}">{{ list.name }}</span>
-        </div>
+<a href="{% url 'lists_detail' list.id %}">
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title" style="color: {{ list.color }}">{{ list.name }}</span>
     </div>
-  </a>
+    <div class="card-action">
+      <a href="{% url 'lists_update' list.id %}" class="btn">Edit</a>
+      <a href="{% url 'lists_delete' list.id %}" class="btn">Delete</a>
+    </div>
+  </div>
+</a>
 {% endfor %}
 
 {% endblock %}

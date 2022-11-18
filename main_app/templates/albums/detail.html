@@ -50,6 +50,54 @@
     </div>
 </div>
 
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>{{ album.title }} is on:</h3>
+        {% if album.lists.count %}
+        {% for list in album.lists.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    <span style="color: {{ list.color }}">{{ list.name }}</span>
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'remove_list' album.id list.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Remove</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>Not on any lists yet.</h5>
+        {% endif %}
+    </div>
+    <div class="col s6">
+        <h3>Existing Lists</h3>
+        {% if lists.count %}
+        {% for list in lists.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    <span style="color: {{ list.color }}">{{ list.name }}</span>
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_list' album.id list.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{album.title}} Already is on all existing lists.</h5>
+        {% endif %}
+    </div>
+</div>
+
 <script>
     const dateEl = document.getElementById('id_date');
     M.Datepicker.init(dateEl, {
