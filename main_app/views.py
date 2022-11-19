@@ -1,7 +1,10 @@
+import uuid
+import os
+import boto3
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Album, List
+from .models import Album, List, Photo
 from .forms import ListenForm
 
 # Create your views here.
@@ -70,4 +73,19 @@ def assoc_list(request, album_id, list_id):
 
 def remove_list(request, album_id, list_id):
     Album.objects.get(id=album_id).lists.remove(list_id)
+    return redirect('detail', album_id=album_id)
+
+def add_photo(request, album_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Photo.objects.create(url=url, album_id=album_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
     return redirect('detail', album_id=album_id)

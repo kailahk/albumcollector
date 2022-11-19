@@ -10,6 +10,7 @@ urlpatterns = [
     path('albums/<int:pk>/update/', views.UpdateAlbum.as_view(), name='update_album'),
     path('albums/<int:pk>/delete/', views.DeleteAlbum.as_view(), name='delete_album'),
     path('albums/<int:album_id>/add_listen/', views.add_listen, name='add_listen'),
+    path('albums/<int:album_id>/add_photo/', views.add_photo, name='add_photo'),
     path('albums/<int:album_id>/assoc_list/<int:list_id>/', views.assoc_list, name='assoc_list'),
     path('albums/<int:album_id>/remove_list/<int:list_id>/', views.remove_list, name='remove_list'),
     path('lists/', views.ListList.as_view(), name='lists_index'),

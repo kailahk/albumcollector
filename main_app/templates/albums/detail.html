@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-
 {% block content %}
+
 <h1>Album Details</h1>
+
 <div class="row">
     <div class="col s6">
         <div class="card">
@@ -18,6 +19,17 @@
                 <a href="{% url 'delete_album' album.id %}" class="btn">Delete</a>
             </div>
         </div>
+        {% for photo in album.photo_set.all %}
+        <img class="responsive-img card-panel" src="{{photo.url}}">
+        {% empty %}
+        <div class="card-panel teal-text center-align">No Artwork Uploaded Yet</div>
+        {% endfor %}
+        <form action="{% url 'add_photo' album.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+            {% csrf_token %}
+            <input type="file" name="photo-file">
+            <br><br>
+            <button type="submit" class="btn">Upload Photo</button>
+        </form>
     </div>
     <h4>&nbsp;&nbsp;Listens:</h4>
     <div class="col s6">
