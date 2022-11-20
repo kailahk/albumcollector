@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date, timedelta
+from django.contrib.auth.models import User
 
 TIMES_OF_DAY = (
     ('M', 'Morning (5am-11am)'),
@@ -27,6 +28,7 @@ class Album(models.Model):
     release_year = models.IntegerField()
     track_list = models.TextField(max_length=500)
     lists = models.ManyToManyField(List)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

@@ -1,24 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1><span class="card-title" style="color: {{ list.color }}">{{ list.name }}</span></h1>
+<h1><span class="list-title" style="color: {{ list.color }}">{{ list.name }}</span></h1>
 
 {% if list.album_set %}
-    {% for album in list.album_set.all %}
-    <a href="/albums/{{ album.id }}">
-        <div class="row">
-            <div class="col s6 col-offset-3">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="card-title">
-                            <h5>{{ album.title }}</h5>
-                            <h6>Artist: {{ album.artist }}</h6>
-                        </div>
+{% for album in list.album_set.all %}
+<a href="/albums/{{ album.id }}">
+    <div class="row">
+        <div class="col s6 col-offset-3">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">
+                        <h5>{{ album.title }}</h5>
+                        <h6>Artist: {{ album.artist }}</h6>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col s6">
+            {% for photo in album.photo_set.all %}
+            <img class="test" src="{{photo.url}}">
+            {% empty %}
+            <div class="card-panel teal-text center-align">No Artwork Uploaded Yet</div>
+            {% endfor %}
+        </div>
+    </div>
     {% endfor %}
-{% endif %}
+    {% endif %}
 
-{% endblock %}
+    {% endblock %}

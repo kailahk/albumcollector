@@ -4,6 +4,10 @@ import boto3
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Album, List, Photo
 from .forms import ListenForm
 
@@ -14,12 +18,14 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def albums_index(request):
-    albums = Album.objects.all()
+    albums = Album.objects.filter(user=request.user)
     return render(request, 'albums/index.html', {
         'albums': albums
     })
 
+@login_required
 def albums_detail(request, album_id):
     album = Album.objects.get(id=album_id)
     id_list = album.lists.all().values_list('id')
@@ -29,18 +35,23 @@ def albums_detail(request, album_id):
         'album': album, 'listen_form': listen_form, 'lists': lists_album_doesnt_have
     })
 
-class CreateAlbum(CreateView):
+class CreateAlbum(LoginRequiredMixin, CreateView):
     model = Album
     fields = ['title', 'artist', 'genres', 'release_year', 'track_list']
 
-class UpdateAlbum(UpdateView):
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class UpdateAlbum(LoginRequiredMixin, UpdateView):
     model = Album
     fields = ['title', 'artist', 'genres', 'release_year', 'track_list']
 
-class DeleteAlbum(DeleteView):
+class DeleteAlbum(LoginRequiredMixin, DeleteView):
     model = Album
     success_url = '/albums'
 
+@login_required
 def add_listen(request, album_id):
     form = ListenForm(request.POST)
     if form.is_valid():
@@ -49,32 +60,35 @@ def add_listen(request, album_id):
         new_listen.save()
     return redirect('detail', album_id=album_id)
 
-class ListList(ListView):
+class ListList(LoginRequiredMixin, ListView):
     model = List
 
-class ListDetail(DetailView):
+class ListDetail(LoginRequiredMixin, DetailView):
     model = List
 
-class ListCreate(CreateView):
-    model = List
-    fields = ['name', 'color']
-
-class ListUpdate(UpdateView):
+class ListCreate(LoginRequiredMixin, CreateView):
     model = List
     fields = ['name', 'color']
 
-class ListDelete(DeleteView):
+class ListUpdate(LoginRequiredMixin, UpdateView):
+    model = List
+    fields = ['name', 'color']
+
+class ListDelete(LoginRequiredMixin, DeleteView):
     model = List
     success_url = '/lists'
 
+@login_required
 def assoc_list(request, album_id, list_id):
     Album.objects.get(id=album_id).lists.add(list_id)
     return redirect('detail', album_id=album_id)
 
+@login_required
 def remove_list(request, album_id, list_id):
     Album.objects.get(id=album_id).lists.remove(list_id)
     return redirect('detail', album_id=album_id)
 
+@login_required
 def add_photo(request, album_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
@@ -89,3 +103,22 @@ def add_photo(request, album_id):
             print('An error occurred uploading file to S3')
             print(e)
     return redirect('detail', album_id=album_id)
+
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    # This is how to create a 'user' form object
+    # that includes the data from the browser
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      # This will add the user to the database
+      user = form.save()
+      # This is how we log a user in via code
+      login(request, user)
+      return redirect('index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  # A bad POST or a GET request, so render signup.html with an empty form
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'registration/signup.html', context)

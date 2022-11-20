@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Album Collector</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
@@ -22,10 +22,16 @@
                 </ul>
                 <ul class="right">
                     <li><a href="{% url 'about' %}">About</a></li>
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'lists_create' %}">Add List</a></li>
                     <li><a href="{% url 'lists_index' %}">View All Lists</a></li>
                     <li><a href="{% url 'create_album' %}">Add Album</a></li>
                     <li><a href="{% url 'index' %}">View All Albums</a></li>
+                    <li><a href="{% url 'logout' %}">Log Out  <span style="color:teal; text-decoration:underline">{{ user.username }}</span></a></li>
+                    {% else %}
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

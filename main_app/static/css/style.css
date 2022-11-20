@@ -16,3 +16,8 @@ footer.page-footer {
 nav, .page-footer {
     background-color: #9fa8da
 }
+
+img.test {
+    height: 10vmin;
+    width: 10vmin;
+}
