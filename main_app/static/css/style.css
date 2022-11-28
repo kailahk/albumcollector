@@ -6,6 +6,7 @@ body {
 
 main {
     flex: 1 0 auto;
+    background-image: url('https://i.imgur.com/8HstIwz.jpg');
 }
 
 footer.page-footer {
@@ -18,6 +19,9 @@ nav, .page-footer {
 }
 
 img.test {
-    height: 10vmin;
-    width: 10vmin;
+    height: 20vmin;
+    width: 20vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

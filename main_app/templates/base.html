@@ -27,7 +27,7 @@
                     <li><a href="{% url 'lists_index' %}">View All Lists</a></li>
                     <li><a href="{% url 'create_album' %}">Add Album</a></li>
                     <li><a href="{% url 'index' %}">View All Albums</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out  <span style="color:teal; text-decoration:underline">{{ user.username }}</span></a></li>
+                    <li><a href="{% url 'logout' %}">Log Out <span style="color:teal; text-decoration:underline">{{ user.username }}</span></a></li>
                     {% else %}
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>
                     <li><a href="{% url 'login' %}">Log In</a></li>
@@ -37,8 +37,8 @@
         </nav>
     </header>
     <main class="container">
-        {% block content %}
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
     </main>
     <footer class="page-footer">&nbsp;&nbsp;All Rights Reserved, &copy; 2022 Album Collector</footer>
 </body>
