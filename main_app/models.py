@@ -14,6 +14,7 @@ TIMES_OF_DAY = (
 class List(models.Model):
     name = models.CharField(max_length=55)
     color = models.CharField(max_length=20)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

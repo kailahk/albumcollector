@@ -12,6 +12,7 @@ from .models import Album, List, Photo
 from .forms import ListenForm
 
 # Create your views here.
+
 def home(request):
     return render(request, 'home.html')
 
@@ -69,6 +70,10 @@ class ListDetail(LoginRequiredMixin, DetailView):
 class ListCreate(LoginRequiredMixin, CreateView):
     model = List
     fields = ['name', 'color']
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class ListUpdate(LoginRequiredMixin, UpdateView):
     model = List

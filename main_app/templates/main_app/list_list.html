@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>All Lists</h1>
+<h1 class="center">All Lists</h1>
 
 {% for list in list_list %}
+{% if list.user == request.user %}
 <a href="{% url 'lists_detail' list.id %}">
   <div class="card">
     <div class="card-content">
       <span class="card-title" style="color: {{ list.color }}">{{ list.name }}</span>
     </div>
-    <div class="card-action">
-      <a href="{% url 'lists_update' list.id %}" class="btn">Edit</a>
+    <div class="card-action list-card-action">
+      <a href="{% url 'lists_update' list.id %}" class="btn">Edit</a>&nbsp;&nbsp;
       <a href="{% url 'lists_delete' list.id %}" class="btn">Delete</a>
     </div>
+    {% endif %}
   </div>
 </a>
 {% endfor %}

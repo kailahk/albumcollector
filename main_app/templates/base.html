@@ -8,17 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Album Collector</title>
+    <link rel="icon"href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-
 <body>
     <header class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
                 <ul>
-                    <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Album Collector</a></li>
+                    <li class="home">
+                        <a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Album Collector</a>
+                    </li>
                 </ul>
                 <ul class="right">
                     <li><a href="{% url 'about' %}">About</a></li>
@@ -27,11 +29,14 @@
                     <li><a href="{% url 'lists_index' %}">View All Lists</a></li>
                     <li><a href="{% url 'create_album' %}">Add Album</a></li>
                     <li><a href="{% url 'index' %}">View All Albums</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out <span style="color:teal; text-decoration:underline">{{ user.username }}</span></a></li>
+                    <li><a href="{% url 'logout' %}">Log Out | <span style="color:teal; text-decoration:underline">{{ user.username|capfirst }}</span></a></li>
                     {% else %}
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>
                     <li><a href="{% url 'login' %}">Log In</a></li>
                     {% endif %}
+                </ul>
+                <ul class="center">
+                    <img src="https://i.imgur.com/SP6YJQb.png" alt="Album Icon" class="logo">
                 </ul>
             </div>
         </nav>
@@ -42,5 +47,4 @@
     </main>
     <footer class="page-footer">&nbsp;&nbsp;All Rights Reserved, &copy; 2022 Album Collector</footer>
 </body>
-
 </html>

@@ -2,11 +2,11 @@
 
 {% block content %}
 {% if object %}
-    <h1>Edit Info for <span class="teal-text">{{ object.title }}</span></h1>
+    <h1 class="center">Edit Info for <span class="teal-text">{{ object.title }}</span></h1>
 {% else %}
-    <h1>Add Album</h1>
+    <h1 class="center">Add Album</h1>
 {% endif %}
-<form action="" method="POST">
+<form action="" method="POST" class="z-depth-2">
     {% csrf_token %}
     <table>
         {{ form.as_table }}

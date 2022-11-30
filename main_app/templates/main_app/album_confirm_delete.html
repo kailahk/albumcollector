@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Delete Album</h1>
-<h4>Are you sure you want to delete <span class="teal-text">{{ object.name }}</span>?</h4>
-<form action="" method="POST">
+<h1 class="center">Delete Album</h1>
+<h4 class="center">Are you sure you want to delete <span class="teal-text">{{ album.title }}</span>?</h4>
+<br>
+<form action="" method="POST" class="center">
     {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'detail' album.id %}">Cancel</a>
+    <input type="submit" value="Yes - Delete!" class="btn">&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'detail' album.id %}" class="btn">No - Cancel</a>
 </form>
 
 {% endblock %}

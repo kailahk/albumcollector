@@ -2,11 +2,14 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-image: url(https://i.imgur.com/CY9vRDs.png);
+    background-position: cover;
+    background-repeat: no-repeat;
+    color: #1b334f
 }
 
 main {
     flex: 1 0 auto;
-    background-image: url('https://i.imgur.com/8HstIwz.jpg');
 }
 
 footer.page-footer {
@@ -15,7 +18,7 @@ footer.page-footer {
 }
 
 nav, .page-footer {
-    background-color: #9fa8da
+    background-color: #2F5A8D
 }
 
 img.test {
@@ -24,4 +27,56 @@ img.test {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+img.logo {
+    height: 50px;
+    margin: 1vmin;
+    float: left;
+    margin-left: 240px;
+}
+
+div.index-cards > div > img {
+    height: 25vmin;
+    padding: 0;
+    margin: 2vmin 5vmin 2vmin 0;
+    float: right
+}
+
+div.card-content > span.card-title {
+    font-size: 6vmin;
+    padding: 0 0 2vmin 0;
+}
+
+div.card > div.list-card-action {
+    padding-left: 0;
+    background-color: #203d6000;
+}
+
+form {
+    padding: 3vmin;
+    border-radius: 1vmin;
+    background-color: #2f598d52;
+    color: white
+}
+
+form.listen-form {
+    padding: 0;
+}
+
+img.album-on-list {
+    height: 15vmin;
+    margin: 1vmin 0 0 2vmin;
+}
+
+div.card {
+    background-color: #2f598d52;
+}
+
+a {
+    color: #1b334f
+}
+
+.reg-form {
+    background-color: #203d6000;
 }
