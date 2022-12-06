@@ -3,8 +3,8 @@ body {
     min-height: 100vh;
     flex-direction: column;
     background-image: url(https://i.imgur.com/CY9vRDs.png);
-    background-position: cover;
-    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100vw 100vh;
     color: #1b334f
 }
 
@@ -18,7 +18,8 @@ footer.page-footer {
 }
 
 nav, .page-footer {
-    background-color: #2F5A8D
+    background-color: #2F5A8D;
+    color: #F9F2EF;
 }
 
 img.test {
@@ -53,7 +54,7 @@ div.card > div.list-card-action {
     background-color: #203d6000;
 }
 
-form {
+form, form.card-panel {
     padding: 3vmin;
     border-radius: 1vmin;
     background-color: #2f598d52;
@@ -74,9 +75,33 @@ div.card {
 }
 
 a {
-    color: #1b334f
+    color: #203d60
 }
 
 .reg-form {
     background-color: #203d6000;
+}
+
+label {
+    color: #1b334f;
+    font-size: 2vmin;
+}
+
+input.btn-flat {
+    font-size: 2.5vmin;
+}
+
+.btn, button {
+    background-color: #203d60;
+    color: #F9F2EF;
+    border-radius: 1vmin;
+}
+
+.btn:hover, button:hover {
+    background-color: #79AFB7;
+    color: #F9F2EF;
+}
+
+li.home > a {
+    font-family: ;
 }

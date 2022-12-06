@@ -22,9 +22,9 @@
         {% for photo in album.photo_set.all %}
         <img class="responsive-img card-panel" src="{{photo.url}}">
         {% empty %}
-        <div class="card-panel teal-text center-align">No Artwork Uploaded Yet</div>
+        <div class="card-panel center-align">No Artwork Uploaded Yet</div>
         {% endfor %}
-        <form action="{% url 'add_photo' album.id %}" enctype="multipart/form-data" method="POST" class="card-panel reg-form">
+        <form action="{% url 'add_photo' album.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
             {% csrf_token %}
             <input type="file" name="photo-file">
             <br><br>
@@ -74,12 +74,12 @@
         {% if list.user == request.user %}
         <div class="card">
             <div class="row">
-                <div class="card-content col s6">
+                <div class="card-content col s8">
                     <span class="card-title">
                         <h4><span style="color: {{ list.color }}">{{ list.name }}</span></h4>
                     </span>
                 </div>
-                <div class="card-action col s5">
+                <div class="card-action col s2">
                     <form action="{% url 'remove_list' album.id list.id %}" method="POST" class="reg-form">
                         {% csrf_token %}
                         <button type="submit" class="btn-floating halfway-fab waves-effect waves-light red">-</button>
@@ -101,12 +101,12 @@
         {% if list.user == request.user %}
         <div class="card">
             <div class="row">
-                <div class="card-content col s6">
+                <div class="card-content col s8">
                     <span class="card-title">
                         <h4><span style="color: {{ list.color }}">{{ list.name }}</span></h4>
                     </span>
                 </div>
-                <div class="card-action col s5">
+                <div class="card-action col s2">
                     <form action="{% url 'assoc_list' album.id list.id %}" method="POST" class="reg-form">
                         {% csrf_token %}
                         <button type="submit" class="btn-floating halfway-fab waves-effect waves-light green">+</button>

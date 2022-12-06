@@ -2,9 +2,9 @@
 
 {% block content %}
 <h1 class="center">Delete Album</h1>
-<h4 class="center">Are you sure you want to delete <span class="teal-text">{{ album.title }}</span>?</h4>
+<h4 class="center">Are you sure you want to delete <span class="">{{ album.title }}</span>?</h4>
 <br>
-<form action="" method="POST" class="center">
+<form action="" method="POST" class="center reg-form">
     {% csrf_token %}
     <input type="submit" value="Yes - Delete!" class="btn">&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="{% url 'detail' album.id %}" class="btn">No - Cancel</a>
