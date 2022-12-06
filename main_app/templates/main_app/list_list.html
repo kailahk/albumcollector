@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1 class="center">All Lists</h1>
-
+{% if list_list %}
 {% for list in list_list %}
 {% if list.user == request.user %}
 <a href="{% url 'lists_detail' list.id %}">
@@ -18,5 +18,6 @@
   </div>
 </a>
 {% endfor %}
+{% endif %}
 
 {% endblock %}
