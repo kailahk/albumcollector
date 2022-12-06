@@ -44,14 +44,14 @@ div.index-cards > div > img {
     float: right
 }
 
-div.card-content > span.card-title {
-    font-size: 6vmin;
-    padding: 0 0 2vmin 0;
-}
-
 div.card > div.list-card-action {
     padding-left: 0;
     background-color: #203d6000;
+}
+
+div.card-content > span.card-title {
+    font-size: 4.5vmin;
+    padding: 0 0 2vmin 0;
 }
 
 form, form.card-panel {
@@ -100,8 +100,4 @@ input.btn-flat {
 .btn:hover, button:hover {
     background-color: #79AFB7;
     color: #F9F2EF;
-}
-
-li.home > a {
-    font-family: ;
 }

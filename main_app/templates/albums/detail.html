@@ -12,7 +12,6 @@
                 <p>Genres: {{ album.genres }}</p><br>
                 <p>Release Year: {{ album.release_year }}</p><br>
                 <p>Tracklist: {{ album.track_list }}</p><br>
-                <p>Your List: {{ album.list }}</p>
             </div>
             <div class="card-action">
                 <a href="{% url 'update_album' album.id %}" class="btn">Edit</a>&nbsp;&nbsp;
